@@ -9,34 +9,38 @@ let guessedNumber = 0;
 
 // Generate a random number between minNumber and maxNumber
 let randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
-
+let personName = prompt('What is your name?');
 
 function getUserGuess() {
-    let usersGuess = prompt('Guess a number between ' + minNumber + ' and ' + maxNumber + '.' + ' You have ' + guessLimit + ' try(s) left.');
+    let usersGuess = prompt(personName + ' ' + 'guess a number between ' + minNumber + ' and ' + maxNumber + '.' + ' You have ' + guessLimit + ' try(s) left.');
     guessedNumber = parseInt(usersGuess);
-    guessCount++;
-    guessLimit--;
+
+    if (isNaN(guessedNumber)) {
+        alert('Please enter a valid number.');
+        getUserGuess();
+    }
+    else {
+        guessCount++;
+        guessLimit--;
+    }
 }
 
 function playGame() {
     getUserGuess();
 
     if (guessedNumber === randomNumber) {
-        alert('You guessed the number! You win!');
+        alert('You guessed the number! You win! ' + personName + '!' + ' ' + 'You guessed' + randomNumber + ' in ' + guessCount + ' try(s)');
     } else if (guessCount === 3) {
-        alert('Game over! The number was ' + randomNumber + '.');
+        alert('Game over' + ' ' + personName + '! The number was ' + randomNumber + '.');
     } else if (guessedNumber < randomNumber) {
-        alert('Too low! ' + ' ' + 'You have ' + guessLimit + ' try(s) left.');
+        alert('Too low! ' + personName + ' ' + 'You have ' + guessLimit + ' try(s) left.');
         playGame();
     } else if (guessedNumber > randomNumber) {
-        alert('Too high! ' + ' ' + 'You have ' + guessLimit + ' try(s) left.');
+        alert('Too high! ' + personName + ' ' + 'You have ' + guessLimit + ' try(s) left.');
         playGame();
     }
 }
 
 playGame();
 
-console.log(randomNumber);
-console.log(guessedNumber);
-console.log(guessCount);
-console.log(guessLimit);
+
