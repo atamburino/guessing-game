@@ -18,9 +18,25 @@ function getUserGuess() {
     guessLimit--;
 }
 
-getUserGuess();
+function playGame() {
+    getUserGuess();
 
+    if (guessedNumber === randomNumber) {
+        alert('You guessed the number! You win!');
+    } else if (guessCount === 3) {
+        alert('Game over! The number was ' + randomNumber + '.');
+    } else if (guessedNumber < randomNumber) {
+        alert('Too low! ' + ' ' + 'You have ' + guessLimit + ' try(s) left.');
+        playGame();
+    } else if (guessedNumber > randomNumber) {
+        alert('Too high! ' + ' ' + 'You have ' + guessLimit + ' try(s) left.');
+        playGame();
+    }
+}
 
+playGame();
+
+console.log(randomNumber);
 console.log(guessedNumber);
 console.log(guessCount);
 console.log(guessLimit);
