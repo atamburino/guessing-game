@@ -30,8 +30,10 @@ function playGame() {
 
     if (guessedNumber === randomNumber) {
         alert('You guessed the number! You win! ' + personName + '!' + ' ' + 'You guessed' + randomNumber + ' in ' + guessCount + ' try(s)');
+        playAgain();
     } else if (guessCount === 3) {
         alert('Game over' + ' ' + personName + '! The number was ' + randomNumber + '.');
+        playAgain();
     } else if (guessedNumber < randomNumber) {
         alert('Too low! ' + personName + ' ' + 'You have ' + guessLimit + ' try(s) left.');
         playGame();
@@ -40,7 +42,13 @@ function playGame() {
         playGame();
     }
 }
-
 playGame();
 
-
+function playAgain() {
+    if (confirm('Do you want to play again?')) {
+        guessCount = 0;
+        guessLimit = 3;
+        randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
+        playGame();
+    }
+}
