@@ -9,7 +9,6 @@ let guessedNumber = 0;
 
 // Generate a random number between minNumber and maxNumber
 let randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
-let personName = prompt('What is your name?');
 
 function getUserGuess() {
     let usersGuess = prompt(personName + ' ' + 'guess a number between ' + minNumber + ' and ' + maxNumber + '.' + ' You have ' + guessLimit + ' try(s) left.');
@@ -42,7 +41,6 @@ function playGame() {
         playGame();
     }
 }
-playGame();
 
 function playAgain() {
     if (confirm('Do you want to play again?')) {
@@ -52,3 +50,23 @@ function playAgain() {
         playGame();
     }
 }
+
+
+function initGame() {
+    // Reset game variables
+    guessCount = 0;
+    guessLimit = 3;
+    randomNumber = Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
+    
+    // Get player's name
+    personName = prompt('What is your name?');
+    
+    // Start the game
+    playGame();
+}
+
+// Add an event listener to the button
+document.addEventListener('DOMContentLoaded', function() {
+    const button = document.querySelector('button');
+    button.addEventListener('click', initGame);
+});
