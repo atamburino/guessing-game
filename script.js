@@ -25,21 +25,37 @@ function getUserGuess() {
 }
 
 function playGame() {
-    getUserGuess();
-
-    if (guessedNumber === randomNumber) {
-        alert('You guessed the number! You win! ' + personName + '!' + ' ' + 'You guessed' + randomNumber + ' in ' + guessCount + ' try(s)');
-        playAgain();
-    } else if (guessCount === 3) {
-        alert('Game over' + ' ' + personName + '! The number was ' + randomNumber + '.');
-        playAgain();
-    } else if (guessedNumber < randomNumber) {
-        alert('Too low! ' + personName + ' ' + 'You have ' + guessLimit + ' try(s) left.');
-        playGame();
-    } else if (guessedNumber > randomNumber) {
-        alert('Too high! ' + personName + ' ' + 'You have ' + guessLimit + ' try(s) left.');
-        playGame();
+    while (guessCount < 3) {
+        getUserGuess();
+        
+        let result;
+        if (guessedNumber === randomNumber) {
+            result = 'correct';
+        } else if (guessedNumber < randomNumber) {
+            result = 'low';
+        } else {
+            result = 'high';
+        }
+        
+        switch (result) {
+            case 'correct':
+                alert(`You guessed the number! You win, ${personName}! You guessed ${randomNumber} in ${guessCount} try(s)`);
+                return playAgain();
+            case 'low':
+                if (guessLimit > 0) {
+                    alert(`Too low! ${personName} You have ${guessLimit} try(s) left.`);
+                }
+                break;
+            case 'high':
+                if (guessLimit > 0) {
+                    alert(`Too high! ${personName} You have ${guessLimit} try(s) left.`);
+                }
+                break;
+        }
     }
+    
+    alert(`Game over ${personName}! The number was ${randomNumber}.`);
+    playAgain();
 }
 
 function playAgain() {
